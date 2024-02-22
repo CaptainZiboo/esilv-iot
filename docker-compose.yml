@@ -40,6 +40,10 @@ services:
     ports:
       - "1883:1883"
       - "9001:9001"
+    volumes:
+      - ./data/mosquitto/config:/mosquitto/config:rw
+      - ./data/mosquitto/data:/mosquitto/data:rw
+      - ./data/mosquitto/log:/mosquitto/log:rw
   nodered:
     image: nodered/node-red:latest
     restart: always
