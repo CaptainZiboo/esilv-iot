@@ -72,6 +72,15 @@ services:
     networks:
       - default_network
 
+  mqttx:
+    image: chenhw2/mqttx:latest
+    restart: always
+    depends_on:
+      mqtt:
+        condition: service_healthy
+    networks:
+      - default_network
+
 networks:
   default_network:
     driver: bridge
