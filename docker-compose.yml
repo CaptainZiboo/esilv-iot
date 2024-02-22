@@ -18,7 +18,9 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - ./data/mysql:/var/lib/mysql
-    
+    networks:
+      - default_network
+
   grafana:
     image: grafana/grafana:latest
     restart: always
@@ -34,6 +36,11 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    networks:
+      - default_network
+
   mqtt:
     image: eclipse-mosquitto:latest
     restart: always
@@ -44,6 +51,9 @@ services:
       - ./data/mosquitto/config:/mosquitto/config:rw
       - ./data/mosquitto/data:/mosquitto/data:rw
       - ./data/mosquitto/log:/mosquitto/log:rw
+    networks:
+      - default_network
+
   nodered:
     image: nodered/node-red:latest
     restart: always
@@ -59,3 +69,9 @@ services:
       retries: 5
     volumes:
       - ./data/nodered:/data
+    networks:
+      - default_network
+
+networks:
+  default_network:
+    driver: bridge
