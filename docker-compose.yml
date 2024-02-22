@@ -73,8 +73,10 @@ services:
       - default_network
 
   mqttx:
-    image: chenhw2/mqttx:latest
+    image: emqx/mqttx-web:latest
     restart: always
+    ports:
+      - "8080:8080"
     depends_on:
       mqtt:
         condition: service_healthy
