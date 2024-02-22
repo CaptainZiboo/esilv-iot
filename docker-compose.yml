@@ -16,6 +16,9 @@ services:
       MYSQL_DATABASE: grafana
       MYSQL_USER: grafana
       MYSQL_PASSWORD: password
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    
   grafana:
     image: grafana/grafana:latest
     restart: always
@@ -31,9 +34,14 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+  mqtt:
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
   nodered:
-    image: captainziboo/nodered:latest
-    container_name: nodered
+    image: nodered/node-red:latest
     restart: always
     ports:
       - "1880:1880"
@@ -45,3 +53,5 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    volumes:
+      - ./data/nodered:/data
