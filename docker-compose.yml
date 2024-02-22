@@ -37,7 +37,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - ./data/grafana:/var/lib/grafana
+      - ./data/grafana:/var/lib/grafana:rw
     networks:
       - default_network
 
@@ -47,6 +47,11 @@ services:
     ports:
       - "1883:1883"
       - "9001:9001"
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-p", "1883", "-t", "healthcheck", "-m", "OK"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     volumes:
       - ./data/mosquitto/config:/mosquitto/config:rw
       - ./data/mosquitto/data:/mosquitto/data:rw
@@ -76,13 +81,13 @@ services:
     image: emqx/mqttx-web:latest
     restart: always
     ports:
-      - "8080:8080"
+      - "80:80"
     depends_on:
       mqtt:
         condition: service_healthy
     networks:
       - default_network
-
+  
 networks:
   default_network:
     driver: bridge
