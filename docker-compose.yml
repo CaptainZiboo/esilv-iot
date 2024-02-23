@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  reverse-proxy:
+    image: traefik:latest
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - ./data/traefik/docker.sock:/var/run/docker.sock
+
   mysql:
     image: mysql:latest
     restart: always
@@ -41,6 +50,8 @@ services:
       - ./data/grafana:/var/lib/grafana
     networks:
       - default_network
+    labels:
+      - "traefik.http.routers.grafana.rule=Host(`grafana.docker.localhost`)"
 
   mqtt:
     image: eclipse-mosquitto:latest
@@ -59,6 +70,8 @@ services:
       - ./data/mosquitto/log:/mosquitto/log
     networks:
       - default_network
+    labels:
+      - "traefik.http.routers.mqtt.rule=Host(`mqtt.docker.localhost`)"
 
   nodered:
     image: nodered/node-red:latest
@@ -77,6 +90,8 @@ services:
       - ./data/nodered:/data
     networks:
       - default_network
+    labels:
+      - "traefik.http.routers.nodered.rule=Host(`nodered.docker.localhost`)"
 
   mqttx:
     image: emqx/mqttx-web:latest
@@ -88,6 +103,8 @@ services:
         condition: service_healthy
     networks:
       - default_network
+    labels:
+      - "traefik.http.routers.mqttx.rule=Host(`mqttx.docker.localhost`)"
   
 networks:
   default_network:
