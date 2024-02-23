@@ -15,10 +15,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - default-bridge
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.docker.localhost`)"
-      - "traefik.http.routers.traefik.entrypoints=web"
 
   grafana:
     image: grafana/grafana:latest
@@ -42,7 +38,7 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.docker.localhost`)"
+      - "traefik.http.routers.grafana.rule=Host(`195.35.28.236`) && PathPrefix(`/grafana`)"
       - "traefik.http.routers.grafana.entrypoints=web"
 
   mysql:
@@ -79,8 +75,8 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.emqx.rule=Host(`emqx.docker.localhost`)"
-      - "traefik.http.routers.emqx.entrypoints=web"
+      - "traefik.tcp.routers.emqx.rule=Host(`195.35.28.236`) && PathPrefix(`/emqx`)"
+      - "traefik.tcp.routers.emqx.entrypoints=web"
 
   nodered:
     image: nodered/node-red:latest
@@ -101,7 +97,7 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nodered.rule=Host(`nodered.docker.localhost`)"
+      - "traefik.http.routers.nodered.rule=Host(`195.35.28.236`) && PathPrefix(`/nodered`)"
       - "traefik.http.routers.nodered.entrypoints=web"
 
   mqttx:
@@ -113,7 +109,7 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mqttx.rule=Host(`mqttx.docker.localhost`)"
+      - "traefik.http.routers.mqttx.rule=Host(`195.35.28.236`) && PathPrefix(`/mqttx`)"
       - "traefik.http.routers.mqttx.entrypoints=web"
   
 networks:
