@@ -37,7 +37,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=PathPrefix(`/grafana`)"
-      - "traefik.http.routers.grafana.entrypoints=grafana"
+      - "traefik.http.routers.grafana.entrypoints=web"
 
   mysql:
     image: mysql:latest
