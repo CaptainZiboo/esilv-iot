@@ -15,4 +15,9 @@ fi
 sudo chown -R 1000:1000 ./data/nodered
 sudo chmod -R 755 ./data/nodered
 
-
+# Set permissions and ownership for Grafana data folder
+if [ ! -d "./data/grafana" ]; then
+    mkdir -p ./data/grafana
+fi
+sudo chown -R 472:472 ./data/grafana
+sudo chmod -R 755 ./data/grafana
