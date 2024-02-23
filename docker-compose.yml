@@ -38,8 +38,9 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`195.35.28.236/grafana`)"
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/grafana`)"
       - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   mysql:
     image: mysql:latest
@@ -81,7 +82,7 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.tcp.routers.emqx.rule=Host(`195.35.28.236`) && PathPrefix(`/emqx`)"
+      - "traefik.tcp.routers.emqx.rule=Host(`195.35.28.236`)"
       - "traefik.tcp.routers.emqx.entrypoints=web"
 
   nodered:
