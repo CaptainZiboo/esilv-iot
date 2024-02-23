@@ -82,8 +82,9 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.tcp.routers.emqx.rule=Host(`195.35.28.236`)"
-      - "traefik.tcp.routers.emqx.entrypoints=web"
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/emqx`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   nodered:
     image: nodered/node-red:latest
@@ -104,9 +105,9 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.nodered.rule=Host(`195.35.28.236`) && PathPrefix(`/nodered`)"
-      - "traefik.http.routers.nodered.entrypoints=web"
-
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/nodered`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
   mqttx:
     image: emqx/mqttx-web:latest
     restart: always
@@ -116,8 +117,9 @@ services:
       - default-bridge
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.mqttx.rule=Host(`195.35.28.236`) && PathPrefix(`/mqttx`)"
-      - "traefik.http.routers.mqttx.entrypoints=web"
+      - "traefik.http.routers.grafana.rule=PathPrefix(`/mqttx`)"
+      - "traefik.http.routers.grafana.entrypoints=web"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
   
 networks:
   default-bridge:
