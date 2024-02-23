@@ -33,7 +33,7 @@ services:
     volumes:
       - ./data/grafana:/var/lib/grafana
     networks:
-      - default_network
+      - default-bridge
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.grafana.rule=Host(`grafana.localhost`)"
@@ -57,27 +57,20 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     networks:
-      - default_network
+      - default-bridge
 
-  mqtt:
-    image: eclipse-mosquitto:latest
+  emqx:
+    image: emqx:latest
     restart: always
-    ports:
-      - "1883:1883"
-      - "9001:9001"
-    healthcheck:
-      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-p", "1883", "-t", "healthcheck", "-m", "OK"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+    environment:
+      EMQX_NAME: emqx
+      EMQX_HOST: 127.0.0.1
     volumes:
-      - ./data/mosquitto/config:/mosquitto/config
-      - ./data/mosquitto/data:/mosquitto/data
-      - ./data/mosquitto/log:/mosquitto/log
+      - vol-emqx-data:/opt/emqx/data
+      - vol-emqx-etc:/opt/emqx/etc
+      - vol-emqx-log:/opt/emqx/log
     networks:
-      - default_network
-    labels:
-      - "traefik.http.routers.mqtt.rule=Host(`mqtt.docker.localhost`)"
+      - default-bridge
 
   nodered:
     image: nodered/node-red:latest
@@ -95,7 +88,7 @@ services:
     volumes:
       - ./data/nodered:/data
     networks:
-      - default_network
+      - default-bridge
     labels:
       - "traefik.http.routers.nodered.rule=Host(`nodered.docker.localhost`)"
 
@@ -104,14 +97,20 @@ services:
     restart: always
     ports:
       - "1885:1885"
-    depends_on:
-      mqtt:
-        condition: service_healthy
     networks:
-      - default_network
+      - default-bridge
     labels:
       - "traefik.http.routers.mqttx.rule=Host(`mqttx.docker.localhost`)"
   
 networks:
-  default_network:
+  default-bridge:
     driver: bridge
+  emqx-bridge:
+    driver: bridge
+
+volumes:
+  vol-emqx-data:
+    name: foo-emqx-data
+  vol-emqx-etc:
+    name: foo-emqx-etc
+  vol-emqx-log:

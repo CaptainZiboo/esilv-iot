@@ -1,7 +1,7 @@
 # Ignore everything in the ./data directory
 data/*
-!data/mosquitto
-data/mosquitto/*
-!data/mosquitto/config
+!data/emqx
+data/emqx/*
+!data/emqx/etc
 
 
