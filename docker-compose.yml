@@ -82,7 +82,7 @@ services:
     image: nodered/node-red:latest
     restart: always
     ports:
-      - "3002:3002"
+      - "3002:1880"
     depends_on:
       mysql:
         condition: service_healthy
@@ -104,7 +104,7 @@ services:
     image: emqx/mqttx-web:latest
     restart: always
     ports:
-      - "3001:3001"
+      - "3001:80"
     networks:
       - default-bridge
     labels:
