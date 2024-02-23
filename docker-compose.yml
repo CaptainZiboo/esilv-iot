@@ -51,7 +51,9 @@ services:
     networks:
       - default_network
     labels:
-      - "traefik.http.routers.grafana.rule=Host(`grafana.docker.localhost`)"
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`localhost`) && PathPrefix(`/grafana`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   mqtt:
     image: eclipse-mosquitto:latest
