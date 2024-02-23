@@ -82,7 +82,7 @@ services:
     image: emqx/mqttx-web:latest
     restart: always
     ports:
-      - "80:80"
+      - "1885:1885"
     depends_on:
       mqtt:
         condition: service_healthy
