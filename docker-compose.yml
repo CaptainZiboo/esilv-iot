@@ -37,7 +37,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - ./data/grafana:/var/lib/grafana:rw
+      - ./data/grafana:/var/lib/grafana
     networks:
       - default_network
 
@@ -53,9 +53,9 @@ services:
       timeout: 5s
       retries: 3
     volumes:
-      - ./data/mosquitto/config:/mosquitto/config:rw
-      - ./data/mosquitto/data:/mosquitto/data:rw
-      - ./data/mosquitto/log:/mosquitto/log:rw
+      - ./data/mosquitto/config:/mosquitto/config
+      - ./data/mosquitto/data:/mosquitto/data
+      - ./data/mosquitto/log:/mosquitto/log
     networks:
       - default_network
 
