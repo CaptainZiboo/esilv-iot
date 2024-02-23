@@ -1,1 +1,7 @@
-/data
+# Ignore everything in the ./data directory
+data/*
+!data/mosquitto
+data/mosquitto/*
+!data/mosquitto/config
+
+
