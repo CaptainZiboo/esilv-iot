@@ -36,7 +36,7 @@ services:
       - default_network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`0.0.0.0`) && PathPrefix(`/grafana`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.docker.localhost`) && PathPrefix(`/grafana`)"
       - "traefik.http.routers.grafana.entrypoints=web"
 
   mysql:
