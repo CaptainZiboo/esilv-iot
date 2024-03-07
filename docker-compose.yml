@@ -51,7 +51,7 @@ services:
       timeout: 5s
       retries: 3
     ports:
-      - "3306:3306"
+      - "3006:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: grafana
