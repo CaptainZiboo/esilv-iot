@@ -37,8 +37,8 @@ Les services seront alors disponibles sur les ports suivants :
 
 ### EMQX
 
-1883 (mqtt)
-1884 (secured mqtt)
-8083 (websocket)
-8084 (secured websocket)
+1883 (mqtt) /
+1884 (secured mqtt) /
+8083 (websocket) /
+8084 (secured websocket) /
 18083 (dashboard)
