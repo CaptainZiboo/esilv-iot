@@ -1,21 +1,6 @@
 version: '3'
 
 services:
-  reverse-proxy:
-    image: traefik:latest
-    command: 
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - default-bridge
-
   grafana:
     image: grafana/grafana:latest
     restart: always
@@ -36,11 +21,6 @@ services:
       - ./data/grafana:/var/lib/grafana
     networks:
       - default-bridge
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=PathPrefix(`/grafana`)"
-      - "traefik.http.routers.grafana.entrypoints=web"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   mysql:
     image: mysql:latest
@@ -88,11 +68,6 @@ services:
       - vol-emqx-log:/opt/emqx/log
     networks:
       - default-bridge
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=PathPrefix(`/emqx`)"
-      - "traefik.http.routers.grafana.entrypoints=web"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
   nodered:
     image: nodered/node-red:latest
@@ -123,11 +98,6 @@ services:
       - "3001:80"
     networks:
       - default-bridge
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=PathPrefix(`/mqttx`)"
-      - "traefik.http.routers.grafana.entrypoints=web"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
   
 networks:
   default-bridge:
