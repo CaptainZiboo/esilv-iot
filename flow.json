@@ -1,6 +1,6 @@
 [
   {
-    "id": "5dd458be451f6792",
+    "id": "09d04065f9877d86",
     "type": "tab",
     "label": "Export",
     "disabled": false,
@@ -14,9 +14,9 @@
     ]
   },
   {
-    "id": "28c24d508eac87c7",
+    "id": "e089035f74ccc85a",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 1",
     "topic": "topic1",
     "qos": "0",
@@ -28,12 +28,12 @@
     "inputs": 0,
     "x": 140,
     "y": 260,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "a3c995be2851911c",
+    "id": "27a1cb92924aefce",
     "type": "debug",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Log",
     "active": true,
     "tosidebar": true,
@@ -48,9 +48,9 @@
     "wires": []
   },
   {
-    "id": "a68364f3ca9a407c",
+    "id": "470116825a70b2b1",
     "type": "mysql",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "mydb": "23cbc2ec0018aa1a",
     "name": "Database",
     "x": 1360,
@@ -58,21 +58,21 @@
     "wires": [[]]
   },
   {
-    "id": "5cc01644316f676c",
+    "id": "a960ab444d0916bb",
     "type": "json",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "",
     "property": "payload",
     "action": "obj",
     "pretty": false,
     "x": 390,
     "y": 260,
-    "wires": [["a3c995be2851911c", "a91c37041540cc33"]]
+    "wires": [["27a1cb92924aefce", "c7842f6d3d6b237f"]]
   },
   {
-    "id": "4d2c795afd3d78d4",
+    "id": "1c9a7c50f375f998",
     "type": "switch",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Dispatch",
     "property": "topic",
     "propertyType": "msg",
@@ -104,16 +104,16 @@
     "x": 840,
     "y": 160,
     "wires": [
-      ["f30f6510e7e491f1"],
-      ["02acf560403916fd"],
-      ["6303af85d29855cb"],
-      ["c66a2fcddd6c19ee"]
+      ["76e2042e5af49b1c"],
+      ["e9bb593fed3c9ceb"],
+      ["534f51bb07cb70a1"],
+      ["be22a7341fc18aad"]
     ]
   },
   {
-    "id": "d884905277352d98",
+    "id": "08916bc140840710",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Test",
     "topic": "test",
     "qos": "2",
@@ -125,12 +125,12 @@
     "inputs": 0,
     "x": 150,
     "y": 180,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "f30f6510e7e491f1",
+    "id": "76e2042e5af49b1c",
     "type": "function",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Test",
     "func": "const topic = msg.topic;\nconst json = JSON.stringify(msg.payload);\n\nmsg.topic = `INSERT INTO test (topic, json) VALUES ('${topic}', '${json}');\\n`;\n\nreturn msg;",
     "outputs": 1,
@@ -141,12 +141,12 @@
     "libs": [],
     "x": 1090,
     "y": 60,
-    "wires": [["a68364f3ca9a407c"]]
+    "wires": [["470116825a70b2b1"]]
   },
   {
-    "id": "0fd9cf68e44b709e",
+    "id": "c4ccebd5214b16bd",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 2",
     "topic": "topic2",
     "qos": "2",
@@ -158,23 +158,23 @@
     "inputs": 0,
     "x": 140,
     "y": 340,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "2b97933cd5a091b3",
+    "id": "977de233d3d653d7",
     "type": "catch",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "",
     "scope": null,
     "uncaught": false,
     "x": 380,
     "y": 480,
-    "wires": [["07d1a166cc303d69"]]
+    "wires": [["4396e967d7924ddd"]]
   },
   {
-    "id": "07d1a166cc303d69",
+    "id": "4396e967d7924ddd",
     "type": "debug",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Error",
     "active": true,
     "tosidebar": true,
@@ -189,9 +189,9 @@
     "wires": []
   },
   {
-    "id": "6303af85d29855cb",
+    "id": "534f51bb07cb70a1",
     "type": "function",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 2",
     "func": "const { value1, value2, value3 } = msg.payload;\n\nmsg.topic = `INSERT INTO table_name (field1, field2, field3) VALUES ('${value1}', '${value2}', '${value3}');\\n`;\n\nreturn msg;",
     "outputs": 1,
@@ -202,12 +202,12 @@
     "libs": [],
     "x": 1100,
     "y": 220,
-    "wires": [["a68364f3ca9a407c"]]
+    "wires": [["470116825a70b2b1"]]
   },
   {
-    "id": "fdfff9738b7b605c",
+    "id": "3d66520aba726ae1",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 3",
     "topic": "topic3",
     "qos": "2",
@@ -219,12 +219,12 @@
     "inputs": 0,
     "x": 140,
     "y": 420,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "bb1ef17a203f8c2c",
+    "id": "037602fcd0d06ccc",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 5",
     "topic": "topic5",
     "qos": "2",
@@ -236,12 +236,12 @@
     "inputs": 0,
     "x": 140,
     "y": 580,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "c66a2fcddd6c19ee",
+    "id": "be22a7341fc18aad",
     "type": "function",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 3",
     "func": "const { value1, value2, value3 } = msg.payload;\n\nmsg.topic = `INSERT INTO table_name (field1, field2, field3) VALUES ('${value1}', '${value2}', '${value3}');\\n`;\n\nreturn msg;",
     "outputs": 1,
@@ -252,12 +252,12 @@
     "libs": [],
     "x": 1100,
     "y": 300,
-    "wires": [["a68364f3ca9a407c"]]
+    "wires": [["470116825a70b2b1"]]
   },
   {
-    "id": "d3e95e706aa7a771",
+    "id": "16660c6bf86a489a",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 6",
     "topic": "topic6",
     "qos": "2",
@@ -269,12 +269,12 @@
     "inputs": 0,
     "x": 140,
     "y": 660,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "02acf560403916fd",
+    "id": "e9bb593fed3c9ceb",
     "type": "function",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 1",
     "func": "const { value1, value2, value3 } = msg.payload;\n\nmsg.topic = `INSERT INTO table_name (field1, field2, field3) VALUES ('${value1}', '${value2}', '${value3}');\\n`;\n\nreturn msg;",
     "outputs": 1,
@@ -285,12 +285,12 @@
     "libs": [],
     "x": 1100,
     "y": 140,
-    "wires": [["a68364f3ca9a407c"]]
+    "wires": [["470116825a70b2b1"]]
   },
   {
-    "id": "c56a4db49f34f5d9",
+    "id": "fdef89714277ad6d",
     "type": "mqtt in",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Groupe 4",
     "topic": "topic4",
     "qos": "2",
@@ -302,12 +302,12 @@
     "inputs": 0,
     "x": 140,
     "y": 500,
-    "wires": [["5cc01644316f676c"]]
+    "wires": [["a960ab444d0916bb"]]
   },
   {
-    "id": "a91c37041540cc33",
+    "id": "c7842f6d3d6b237f",
     "type": "switch",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Database Switch",
     "property": "database",
     "propertyType": "flow",
@@ -328,12 +328,12 @@
     "outputs": 2,
     "x": 610,
     "y": 260,
-    "wires": [["4d2c795afd3d78d4"], ["7f128b5ba10ac0b0"]]
+    "wires": [["1c9a7c50f375f998"], ["f20d66e8c94e162b"]]
   },
   {
-    "id": "7f128b5ba10ac0b0",
+    "id": "f20d66e8c94e162b",
     "type": "function",
-    "z": "5dd458be451f6792",
+    "z": "09d04065f9877d86",
     "name": "Collection",
     "func": "msg.collection = msg.topic;\n\nreturn msg;",
     "outputs": 1,
@@ -344,13 +344,13 @@
     "libs": [],
     "x": 840,
     "y": 380,
-    "wires": [["915aa06dee3c081e"]]
+    "wires": [["d021d16f84105b75"]]
   },
   {
-    "id": "915aa06dee3c081e",
+    "id": "d021d16f84105b75",
     "type": "mongodb out",
-    "z": "5dd458be451f6792",
-    "mongodb": "d9519f9357eed065",
+    "z": "09d04065f9877d86",
+    "mongodb": "53ac85727e2804ba",
     "name": "Database",
     "collection": "",
     "payonly": true,
@@ -359,6 +359,211 @@
     "operation": "store",
     "x": 1100,
     "y": 380,
+    "wires": []
+  },
+  {
+    "id": "9519b0041a564b19",
+    "type": "mqtt in",
+    "z": "09d04065f9877d86",
+    "name": "Register",
+    "topic": "register",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "45a8550c83b4dec0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 0,
+    "x": 140,
+    "y": 740,
+    "wires": [["2645535cfcf6e14d", "ee28dc75ff989a9d"]]
+  },
+  {
+    "id": "2645535cfcf6e14d",
+    "type": "json",
+    "z": "09d04065f9877d86",
+    "name": "toJS",
+    "property": "payload",
+    "action": "obj",
+    "pretty": false,
+    "x": 330,
+    "y": 740,
+    "wires": [["9426378016a14290", "d08fae6b20c21667"]]
+  },
+  {
+    "id": "0ef9e869b13f9897",
+    "type": "function",
+    "z": "09d04065f9877d86",
+    "name": "Topic",
+    "func": "msg.topic = msg.payload.topic;\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 820,
+    "wires": [["df2495148bbeb3ca"]]
+  },
+  {
+    "id": "df2495148bbeb3ca",
+    "type": "mqtt in",
+    "z": "09d04065f9877d86",
+    "name": "Dynamique",
+    "topic": "",
+    "qos": "2",
+    "datatype": "auto-detect",
+    "broker": "45a8550c83b4dec0",
+    "nl": false,
+    "rap": true,
+    "rh": 0,
+    "inputs": 1,
+    "x": 730,
+    "y": 820,
+    "wires": [[]]
+  },
+  {
+    "id": "5c7124a1719a5334",
+    "type": "http request",
+    "z": "09d04065f9877d86",
+    "name": "Inscription Grafana",
+    "method": "POST",
+    "ret": "txt",
+    "paytoqs": "body",
+    "url": "http://admin:password@127.0.0.1:3000/api/admin/users",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 750,
+    "y": 660,
+    "wires": [["7944036675b5794b"]]
+  },
+  {
+    "id": "9426378016a14290",
+    "type": "function",
+    "z": "09d04065f9877d86",
+    "name": "Body",
+    "func": "const { username, password } = msg.payload;\n\nmsg.payload = {\n  name: username,\n  email: `${username}@grafana`,\n  login: username,\n  password,\n}\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 660,
+    "wires": [["5c7124a1719a5334"]]
+  },
+  {
+    "id": "74a5b2e101a09636",
+    "type": "http request",
+    "z": "09d04065f9877d86",
+    "name": "Dashboard Creation",
+    "method": "POST",
+    "ret": "txt",
+    "paytoqs": "ignore",
+    "url": "http://admin:password@127.0.0.1:3000/api/dashboards/db",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 760,
+    "y": 740,
+    "wires": [["ae96e147bcbef1c2"]]
+  },
+  {
+    "id": "d08fae6b20c21667",
+    "type": "function",
+    "z": "09d04065f9877d86",
+    "name": "Body",
+    "func": "const { topic } = msg.payload;\n\nmsg.payload = {\n  dashboard: {\n    id: null,\n    uid: null,\n    title: topic,\n    tags: [ topic ],\n    timezone: \"fr-FR\",\n    schemaVersion: 16,\n    refresh: \"5s\"\n  },\n  folderUid: null,\n}\n\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 530,
+    "y": 740,
+    "wires": [["74a5b2e101a09636"]]
+  },
+  {
+    "id": "7944036675b5794b",
+    "type": "debug",
+    "z": "09d04065f9877d86",
+    "name": "InscriptionGrafanaDebug",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "targetType": "full",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1230,
+    "y": 660,
+    "wires": []
+  },
+  {
+    "id": "ae96e147bcbef1c2",
+    "type": "debug",
+    "z": "09d04065f9877d86",
+    "name": "DashboardCreationDebug",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "true",
+    "targetType": "full",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 1250,
+    "y": 740,
+    "wires": []
+  },
+  {
+    "id": "ee28dc75ff989a9d",
+    "type": "http request",
+    "z": "09d04065f9877d86",
+    "name": "",
+    "method": "GET",
+    "ret": "obj",
+    "paytoqs": "ignore",
+    "url": "http://admin:password@host.docker.internal:3000/appi/org",
+    "tls": "",
+    "persist": false,
+    "proxy": "",
+    "insecureHTTPParser": false,
+    "authType": "",
+    "senderr": false,
+    "headers": [],
+    "x": 350,
+    "y": 900,
+    "wires": [["b56b5d50318be4ae"]]
+  },
+  {
+    "id": "b56b5d50318be4ae",
+    "type": "debug",
+    "z": "09d04065f9877d86",
+    "name": "AAAAAAAAAH",
+    "active": true,
+    "tosidebar": true,
+    "console": true,
+    "tostatus": false,
+    "complete": "true",
+    "targetType": "full",
+    "statusVal": "",
+    "statusType": "auto",
+    "x": 600,
+    "y": 900,
     "wires": []
   },
   {
@@ -396,14 +601,14 @@
     "id": "23cbc2ec0018aa1a",
     "type": "MySQLdatabase",
     "name": "MySQL",
-    "host": "127.0.0.1",
-    "port": "3306",
-    "db": "example",
+    "host": "195.35.28.236",
+    "port": "3006",
+    "db": "grafana",
     "tz": "",
     "charset": "UTF8"
   },
   {
-    "id": "d9519f9357eed065",
+    "id": "53ac85727e2804ba",
     "type": "mongodb",
     "hostname": "127.0.0.1",
     "topology": "direct",
